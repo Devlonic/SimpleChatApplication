@@ -2,6 +2,13 @@
 
 namespace SimpleChatApplication.DAL.Interfaces {
     public interface IRepository<EntityType, PrimaryKeyType> where EntityType : IEntity {
+
+        /// <summary>
+        /// Get entity by it`s primary key
+        /// </summary>
+        /// <param name="id"></param>
+        /// <exception cref="Ardalis.GuardClauses.NotFoundException">Throws when entity with key now found</exception>
+        /// <returns>Entity instance</returns>
         Task<EntityType> GetByIdAsync(PrimaryKeyType id);
         Task<IEnumerable<EntityType>> GetAsync(
             Expression<Func<EntityType, bool>>? filter = null,

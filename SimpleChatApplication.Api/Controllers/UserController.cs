@@ -1,13 +1,14 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SimpleChatApplication.Api.Dto;
+using SimpleChatApplication.Api.Dto.Users;
 using SimpleChatApplication.Api.Filters;
 using SimpleChatApplication.BLL.CQRS.Users.Commands;
 using SimpleChatApplication.DAL.Data.UnitOfWorks;
 using SimpleChatApplication.DAL.Entities;
 using SimpleChatApplication.DAL.Interfaces;
 
-namespace SimpleChatApplication.Api.Controllers {
+namespace SimpleChatApplication.Api.Controllers
+{
     [ApiController]
     [Route("api/[controller]/[action]")]
     [ApiExceptionFilter]
