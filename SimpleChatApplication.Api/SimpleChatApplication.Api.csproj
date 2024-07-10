@@ -7,8 +7,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="SimpleChatApplication.db" />
+    <None Remove="SimpleChatApplication.db-shm" />
+    <None Remove="SimpleChatApplication.db-wal" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.20">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleChatApplication.BLL\SimpleChatApplication.BLL.csproj" />
+    <ProjectReference Include="..\SimpleChatApplication.DAL\SimpleChatApplication.DAL.csproj" />
   </ItemGroup>
 
 </Project>
