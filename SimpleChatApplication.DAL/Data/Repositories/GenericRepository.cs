@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SimpleChatApplication.DAL.Data.Contexts;
 using SimpleChatApplication.DAL.Interfaces;
 using System.Linq.Expressions;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace SimpleChatApplication.DAL.Data.Repositories {
     public class GenericRepository<EntityType, PrimaryKeyType> : IRepository<EntityType, PrimaryKeyType> where EntityType : class, IEntity {
@@ -54,6 +55,23 @@ namespace SimpleChatApplication.DAL.Data.Repositories {
             if ( entity is null )
                 throw new NotFoundException(id?.ToString() ?? "", typeof(EntityType).FullName ?? "");
             return entity;
+        }
+
+        public async Task<EntityType?> GetFirstByFilter(
+            Expression<Func<EntityType, bool>>? filter = null,
+            string includeProperties = "") {
+            IQueryable<EntityType> query = dbSet;
+
+            if ( filter != null ) {
+                query = query.Where(filter);
+            }
+
+            foreach ( var includeProperty in includeProperties.Split
+                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries) ) {
+                query = query.Include(includeProperty);
+            }
+
+            return await query.FirstOrDefaultAsync();
         }
 
         public virtual async Task InsertAsync(EntityType entity) {

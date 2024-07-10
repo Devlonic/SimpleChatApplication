@@ -1,5 +1,5 @@
 using SimpleChatApplication.DAL;
-using SimpleChatApplication.DAL.Data.UnitOfWorks;
+using SimpleChatApplication.BLL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +14,9 @@ builder.Services.AddSwaggerGen();
 
 // Add DAL services
 builder.Services.AddDataAccessLayerServices(configuration);
+
+// Add BLL services
+builder.Services.AddBusinessLogicLayerServices(configuration);
 
 var app = builder.Build();
 
