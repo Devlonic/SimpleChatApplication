@@ -25,7 +25,10 @@ namespace SimpleChatApplication.Api.Controllers {
             var userId = await mediator.Send(new SignInUserCommand() {
                 UserName = dto.UserName,
             });
-            return Ok(userId);
+            var user1Id = await mediator.Send(new SignInUserCommand() {
+                UserName = dto.UserName,
+            });
+            return Ok(userId + user1Id);
         }
     }
 }

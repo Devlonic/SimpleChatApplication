@@ -20,7 +20,7 @@ namespace SimpleChatApplication.DAL {
             });
 
             // Add Data Access Tier services
-            services.AddTransient<IUnitOfWorkFactory>(sp =>
+            services.AddScoped<IUnitOfWorkFactory>(sp =>
                 new UnitOfWorkFactory(sp.GetRequiredService<ChatApplicationDbContext>()));
 
             return services;

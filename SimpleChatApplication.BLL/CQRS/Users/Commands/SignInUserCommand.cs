@@ -15,7 +15,7 @@ namespace SimpleChatApplication.BLL.CQRS.Users.Commands {
             }
 
             public async Task<int> Handle(SignInUserCommand request, CancellationToken cancellationToken) {
-                using var unitOfWork = unitOfWorkFactory.CreateUnitOfWork();
+                var unitOfWork = unitOfWorkFactory.CreateUnitOfWork();
                 var repository = unitOfWork.GetRepository<UserEntity>();
 
                 var existingUser = await repository

@@ -7,7 +7,6 @@ using System.Collections.Concurrent;
 namespace SimpleChatApplication.DAL.Data.UnitOfWorks {
     public class UnitOfWork : IUnitOfWork {
         private readonly ChatApplicationDbContext dbContext;
-        private bool disposedValue;
 
         // a vault for all repositories
         private readonly ConcurrentDictionary<Type, object> repositories = new();
@@ -29,22 +28,6 @@ namespace SimpleChatApplication.DAL.Data.UnitOfWorks {
 
         public void Rollback() {
             throw new NotImplementedException();
-        }
-
-        protected virtual void Dispose(bool disposing) {
-            if ( !disposedValue ) {
-                if ( disposing ) {
-                    dbContext.Dispose();
-                }
-
-                disposedValue = true;
-            }
-        }
-
-        public void Dispose() {
-            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
         }
 
         /// <summary>
