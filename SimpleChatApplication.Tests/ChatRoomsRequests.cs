@@ -1,9 +1,38 @@
 ﻿using SimpleChatApplication.BLL.CQRS.ChatRooms.Commands;
+using SimpleChatApplication.BLL.CQRS.ChatRooms.Notifications;
 using SimpleChatApplication.BLL.CQRS.ChatRooms.Queries;
 using SimpleChatApplication.BLL.CQRS.Users.Commands;
 using Xunit;
 namespace SimpleChatApplication.Tests {
     public class ChatRoomsRequests : TestBase {
+        [Fact]
+        public async Task Should() {
+            // create user
+            var user1Id = await Mediator.Send(new SignInUserCommand() {
+                UserName = "Username1"
+            });
+            var user2Id = await Mediator.Send(new SignInUserCommand() {
+                UserName = "Username1"
+            });
+
+            var room1 = await Mediator.Send(new CreateChatRoomUserCommand() {
+                CreatorId = user1Id,
+                Title = $"ChatRoom_1"
+            });
+
+            var room2 = await Mediator.Send(new CreateChatRoomUserCommand() {
+                CreatorId = user1Id,
+                Title = $"ChatRoom_2"
+            });
+
+            // Username2 try to join ChatRoom_1 chat
+            await Mediator.Publish(new NewUserConnectedToRoomNotification() {
+                ChatRoomId = room1,
+                UserId = user2Id
+            });
+        }
+
+
         [Fact]
         public async Task ShouldReturnTwoDifferentKeys_WhenChatTitleIsSame() {
             var userId = await Mediator.Send(new SignInUserCommand() {

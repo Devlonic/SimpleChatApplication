@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SimpleChatApplication.DAL.Data.Contexts;
 
-namespace SimpleChatApplication.DAL.Data {
+namespace SimpleChatApplication.Api {
     public static class SeederDB {
         public static void SeedData(this IApplicationBuilder app) {
             using ( var scope = app.ApplicationServices

@@ -7,9 +7,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NexTube.Application.Common.Behaviours;
 using SimpleChatApplication.BLL.Behaviors;
+using SimpleChatApplication.BLL.CQRS.Events;
 using SimpleChatApplication.BLL.Mappings;
+using SimpleChatApplication.BLL.Models.EventTypes;
 using SimpleChatApplication.DAL.Data.Contexts;
 using SimpleChatApplication.DAL.Data.UnitOfWorks;
+using SimpleChatApplication.DAL.Entities;
 using SimpleChatApplication.DAL.Interfaces;
 using System.Reflection;
 
