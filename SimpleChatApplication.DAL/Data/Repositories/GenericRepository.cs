@@ -49,6 +49,40 @@ namespace SimpleChatApplication.DAL.Data.Repositories {
                 return await query.ToListAsync();
             }
         }
+        public virtual async Task<IEnumerable<ReturnType>> GetAsync<ReturnType>(
+            Expression<Func<EntityType, bool>> filter,
+            Expression<Func<EntityType, ReturnType>> selector,
+            string includeProperties,
+            Func<IQueryable<ReturnType>, IOrderedQueryable<ReturnType>>? orderBy = null,
+            int? skip = null,
+            int? take = null) {
+
+            var tempQuery = dbSet
+                .Where(filter);
+
+            if ( skip is not null )
+                tempQuery = tempQuery.Skip(skip.Value);
+
+            if ( take is not null )
+                tempQuery = tempQuery.Take(take.Value);
+
+            foreach ( var includeProperty in includeProperties.Split
+                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries) ) {
+                tempQuery = tempQuery.Include(includeProperty);
+            }
+
+            IQueryable<ReturnType> query =
+                tempQuery
+                .Select(selector);
+
+            if ( orderBy != null ) {
+                return await orderBy(query).ToListAsync();
+            }
+            else {
+                return await query.ToListAsync();
+            }
+        }
+
 
         public virtual async Task<EntityType> GetByIdAsync(PrimaryKeyType id) {
             var entity = await dbSet.FindAsync(id);

@@ -1,4 +1,5 @@
 ﻿using Ardalis.GuardClauses;
+using AutoMapper;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NexTube.Application.Common.Behaviours;
 using SimpleChatApplication.BLL.Behaviors;
+using SimpleChatApplication.BLL.Mappings;
 using SimpleChatApplication.DAL.Data.Contexts;
 using SimpleChatApplication.DAL.Data.UnitOfWorks;
 using SimpleChatApplication.DAL.Interfaces;
@@ -24,6 +26,13 @@ namespace SimpleChatApplication.BLL {
                 // each MediatR request before execution would be passed through pipes
                 config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehavior<,>));
                 config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            });
+
+            // add AutoMapper for automatic types mapping
+            services.AddAutoMapper(config => {
+                config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
+                config.AddProfile(new AssemblyMappingProfile(typeof(ChatApplicationDbContext).Assembly));
+
             });
 
             return services;

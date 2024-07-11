@@ -14,6 +14,14 @@ namespace SimpleChatApplication.DAL.Interfaces {
             Expression<Func<EntityType, bool>>? filter = null,
             Func<IQueryable<EntityType>, IOrderedQueryable<EntityType>>? orderBy = null,
             string includeProperties = "");
+        Task<IEnumerable<ReturnType>> GetAsync<ReturnType>(
+            Expression<Func<EntityType, bool>> filter,
+            Expression<Func<EntityType, ReturnType>> selector,
+            string includeProperties,
+            Func<IQueryable<ReturnType>, IOrderedQueryable<ReturnType>>? orderBy = null,
+            int? skip = null,
+            int? take = null);
+
         Task<EntityType?> GetFirstByFilter(
             Expression<Func<EntityType, bool>>? filter = null,
             string includeProperties = "");
