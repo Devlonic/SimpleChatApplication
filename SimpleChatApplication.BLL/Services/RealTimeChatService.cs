@@ -3,6 +3,7 @@ using SimpleChatApplication.BLL.Exceptions;
 using SimpleChatApplication.BLL.Models.EventTypes;
 using SimpleChatApplication.BLL.Services;
 using SimpleChatApplication.DAL.Entities;
+using System.Collections.Generic;
 using static SimpleChatApplication.BLL.Models.EventTypes.ChatMessageEvent;
 
 namespace SimpleChatApplication.BLL.Services {
@@ -12,6 +13,23 @@ namespace SimpleChatApplication.BLL.Services {
 
         public RealTimeChatService(IRealTimeMessenger messenger) {
             this.messenger = messenger;
+        }
+
+        public async Task DeleteChatRoomAsync(ChatMessageEvent messageEvent) {
+            var chatDeleteInfo = messageEvent.MessageBody as ChatMessageEvent.ChatRoomDeletedInfo;
+
+            // if room not found
+            if ( !activeRooms.ContainsKey(chatDeleteInfo.ChatRoomId) )
+                throw new NotFoundException(chatDeleteInfo.ChatRoomId.ToString(), nameof(ChatRoomEntity));
+
+            var chatMembers = activeRooms[chatDeleteInfo.ChatRoomId].ActiveUserLists;
+
+            await this.messenger
+                .SendMessageToAsync(
+                    chatMembers.Select(user => user.Id.ToString()),
+                    "ChatMessageEvent",
+                    messageEvent);
+            activeRooms.Remove(chatDeleteInfo.ChatRoomId);
         }
 
         public async Task JoinToRoomAsync(ChatMessageEvent messageEvent) {

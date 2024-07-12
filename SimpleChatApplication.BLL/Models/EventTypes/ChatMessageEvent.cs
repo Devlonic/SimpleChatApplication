@@ -55,5 +55,15 @@ namespace SimpleChatApplication.BLL.Models.EventTypes {
             [JsonIgnore]
             public ChatRoomEntity? ChatRoom { get; set; }
         }
+
+        public class ChatRoomDeletedInfo {
+            public int ChatRoomId { get; set; }
+            public string? Message { get; set; }
+
+            [JsonIgnore]
+            public UserEntity? User { get; set; }
+            [JsonIgnore]
+            public ChatRoomEntity? ChatRoom { get; set; }
+        }
     }
 }

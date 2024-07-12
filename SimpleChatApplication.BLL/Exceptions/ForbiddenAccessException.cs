@@ -7,5 +7,8 @@
 
         public ForbiddenAccessException(string? message, Exception? innerException) : base(message, innerException) {
         }
+
+        public ForbiddenAccessException(int? requesterId, int? requestedKey, string entityName) : this($"Access denied for user {requesterId} for {entityName} with key {requestedKey}") {
+        }
     }
 }

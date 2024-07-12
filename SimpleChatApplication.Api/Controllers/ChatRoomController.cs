@@ -21,10 +21,10 @@ namespace SimpleChatApplication.Api.Controllers {
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateRoom(CreateChatRoomRequestDto dto) {
+        public async Task<ActionResult> CreateRoom(CreateChatRoomRequestDto dto, [FromQuery] int userId) {
             var chatRoomId = await mediator.Send(new CreateChatRoomUserCommand() {
                 Title = dto.Title,
-                CreatorId = dto.UserId,
+                CreatorId = userId,
             });
 
             return Ok(new CreateChatRoomResponceDto() {
@@ -32,6 +32,13 @@ namespace SimpleChatApplication.Api.Controllers {
             });
         }
 
-
+        [HttpPost]
+        public async Task<ActionResult> DeleteRoom([FromBody] DeleteChatRoomRequestDto dto, [FromQuery] int userId) {
+            await mediator.Send(new DeleteChatRoomUserCommand() {
+                ChatRoomId = dto.ChatRoomId,
+                RequesterId = userId
+            });
+            return Ok();
+        }
     }
 }

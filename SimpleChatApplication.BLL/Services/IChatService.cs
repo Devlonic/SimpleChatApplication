@@ -6,5 +6,6 @@ namespace SimpleChatApplication.BLL.Services {
         Task JoinToRoomAsync(ChatMessageEvent messageEvent);
         Task QuitFromRoomAsync(ChatMessageEvent messageEvent);
         Task SendMessageAsync(ChatMessageEvent messageEvent);
+        Task DeleteChatRoomAsync(ChatMessageEvent messageEvent);
     }
 }
