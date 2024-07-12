@@ -34,5 +34,26 @@ namespace SimpleChatApplication.Api.Hubs {
                 UserId = userId
             });
         }
+        public async Task QuitChatRoom(JoinToChatRoomRequestDto dto) {
+            var userId = int.Parse(Context.UserIdentifier ?? "");
+
+            await mediator.Publish(new UserQuitChatRoomNotification() {
+                ChatRoomId = dto.ChatRoomId,
+                UserId = userId,
+                QuitReason = BLL.Models.EventTypes.ChatMessageEvent.UserQuitInfo.QuitReason.Quit
+            });
+        }
+
+        public override async Task OnDisconnectedAsync(Exception? exception) {
+            var userId = int.Parse(Context.UserIdentifier ?? "-1");
+            if ( userId == -1 )
+                return;
+
+            await mediator.Publish(new UserQuitChatRoomNotification() {
+                ChatRoomId = null, // we dont know, does user is member of any chat rooms
+                UserId = userId,
+                QuitReason = BLL.Models.EventTypes.ChatMessageEvent.UserQuitInfo.QuitReason.ConnectionLost
+            });
+        }
     }
 }

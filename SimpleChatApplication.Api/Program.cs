@@ -34,7 +34,7 @@ builder.Services.AddDataAccessLayerServices(configuration);
 builder.Services.AddBusinessLogicLayerServices(configuration);
 
 // Add API services
-builder.Services.AddSingleton<IChatService, RealTimeChatService>();
+builder.Services.AddSingleton<IRealTimeMessenger, SignalrRealTimeMessenger>();
 
 // add SignalR wrappers
 builder.Services.AddScoped<IEventPublisher<ChatMessageEvent>, ChatMessageEventPublisher>();

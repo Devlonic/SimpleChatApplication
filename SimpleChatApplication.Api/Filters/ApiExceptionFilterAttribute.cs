@@ -2,6 +2,7 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using SimpleChatApplication.BLL.Exceptions;
 
 namespace SimpleChatApplication.Api.Filters {
     public class ApiExceptionFilterAttribute : ExceptionFilterAttribute {

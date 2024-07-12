@@ -15,11 +15,12 @@ namespace SimpleChatApplication.Tests {
             Task.Run(CleanUpEnviroment).Wait();
         }
         protected IServiceProvider ServiceProvider { get; private set; }
+        protected IServiceCollection Services { get; private set; }
         protected IMediator Mediator { get; private set; }
 
         public async Task PrepareEnviroment() {
             // create empty services vault
-            IServiceCollection services = new ServiceCollection();
+            Services = new ServiceCollection();
 
             // setup configuration
             var configurationBuilder = new ConfigurationBuilder();
@@ -31,10 +32,10 @@ namespace SimpleChatApplication.Tests {
             configuration["ConnectionStrings:default"] = string.Format(configuration["ConnectionStrings:default"] ?? "", Guid.NewGuid());
 
             // setup DAL, BLL services
-            services.AddBusinessLogicLayerServices(configuration);
-            services.AddDataAccessLayerServices(configuration);
-            services.AddLogging();
-            ServiceProvider = services.BuildServiceProvider();
+            Services.AddBusinessLogicLayerServices(configuration);
+            Services.AddDataAccessLayerServices(configuration);
+            Services.AddLogging();
+            ServiceProvider = Services.BuildServiceProvider();
 
             // recreate database
             var database = ServiceProvider.GetRequiredService<ChatApplicationDbContext>();
@@ -44,7 +45,9 @@ namespace SimpleChatApplication.Tests {
             // get mediator instance
             Mediator = ServiceProvider.GetRequiredService<IMediator>();
         }
-
+        protected void RebuildServiceProvider() {
+            ServiceProvider = Services.BuildServiceProvider();
+        }
         public async Task CleanUpEnviroment() {
             var database = ServiceProvider.GetRequiredService<ChatApplicationDbContext>();
             await database.Database.EnsureDeletedAsync();

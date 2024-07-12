@@ -26,6 +26,24 @@ namespace SimpleChatApplication.BLL.Models.EventTypes {
             public ChatRoomEntity? ChatRoom { get; set; }
         }
 
+        public class UserQuitInfo {
+            public string UserName { get; set; }
+            public int UserId { get; set; }
+            public int? ChatRoomId { get; set; }
+            public QuitReason UserQuitReason { get; set; }
+
+            [JsonIgnore]
+            public UserEntity? User { get; set; }
+            [JsonIgnore]
+            public ChatRoomEntity? ChatRoom { get; set; }
+
+            public enum QuitReason {
+                Unknown,
+                Quit,
+                ConnectionLost
+            }
+        }
+
         public class SendMessageInfo {
             public string UserName { get; set; }
             public int UserId { get; set; }

@@ -10,6 +10,7 @@ using SimpleChatApplication.BLL.Behaviors;
 using SimpleChatApplication.BLL.CQRS.Events;
 using SimpleChatApplication.BLL.Mappings;
 using SimpleChatApplication.BLL.Models.EventTypes;
+using SimpleChatApplication.BLL.Services;
 using SimpleChatApplication.DAL.Data.Contexts;
 using SimpleChatApplication.DAL.Data.UnitOfWorks;
 using SimpleChatApplication.DAL.Entities;
@@ -37,6 +38,8 @@ namespace SimpleChatApplication.BLL {
                 config.AddProfile(new AssemblyMappingProfile(typeof(ChatApplicationDbContext).Assembly));
 
             });
+
+            services.AddSingleton<IChatService, RealTimeChatService>();
 
             return services;
         }
