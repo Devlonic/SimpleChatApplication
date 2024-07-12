@@ -5,6 +5,7 @@ using SimpleChatApplication.Api.Dto.ChatRooms;
 using SimpleChatApplication.Api.Dto.Users;
 using SimpleChatApplication.Api.Filters;
 using SimpleChatApplication.BLL.CQRS.ChatRooms.Commands;
+using SimpleChatApplication.BLL.CQRS.ChatRooms.Queries;
 using SimpleChatApplication.BLL.CQRS.Users.Commands;
 
 namespace SimpleChatApplication.Api.Controllers {
@@ -39,6 +40,15 @@ namespace SimpleChatApplication.Api.Controllers {
                 RequesterId = userId
             });
             return Ok();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetAllRooms([FromQuery] GetAllChatRoomsDto dto) {
+            var rooms = await mediator.Send(new GetAllChatRoomsQuery() {
+                CurrentPage = dto.CurrentPage - 1,
+                PageSize = 10
+            });
+            return Ok(rooms);
         }
     }
 }

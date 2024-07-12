@@ -7,4 +7,8 @@ namespace SimpleChatApplication.Api.Dto.ChatRooms {
     public class CreateChatRoomResponceDto {
         public int CreatedChatId { get; set; }
     }
+
+    public class GetAllChatRoomsDto {
+        public int CurrentPage { get; set; }
+    }
 }
