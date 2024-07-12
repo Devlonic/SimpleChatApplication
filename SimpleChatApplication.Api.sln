@@ -5,13 +5,15 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleChatApplication.Api", "SimpleChatApplication.Api\SimpleChatApplication.Api.csproj", "{03E5D482-C1AE-4E7E-99B7-F271FE59A526}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleChatApplication.DAL", "SimpleChatApplication.DAL\SimpleChatApplication.DAL.csproj", "{F20CFA91-B362-4465-86F7-46742C6F0759}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleChatApplication.DAL", "SimpleChatApplication.DAL\SimpleChatApplication.DAL.csproj", "{F20CFA91-B362-4465-86F7-46742C6F0759}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleChatApplication.BLL", "SimpleChatApplication.BLL\SimpleChatApplication.BLL.csproj", "{5A307D95-1629-4CD1-A7B4-2AAD17F14022}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleChatApplication.BLL", "SimpleChatApplication.BLL\SimpleChatApplication.BLL.csproj", "{5A307D95-1629-4CD1-A7B4-2AAD17F14022}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D6EC06A4-7405-4F98-B1B4-5528863920A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleChatApplication.Tests", "SimpleChatApplication.Tests\SimpleChatApplication.Tests.csproj", "{239830B2-95E1-4699-9DC7-B0793D1AB10D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleChatApplication.Tests", "SimpleChatApplication.Tests\SimpleChatApplication.Tests.csproj", "{239830B2-95E1-4699-9DC7-B0793D1AB10D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleChatApplication.Tests.Integration", "SimpleChatApplication.Tests.Integration\SimpleChatApplication.Tests.Integration.csproj", "{47AC3A8B-5CA0-450E-BD6D-8068BDD6E83B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,12 +37,17 @@ Global
 		{239830B2-95E1-4699-9DC7-B0793D1AB10D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{239830B2-95E1-4699-9DC7-B0793D1AB10D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{239830B2-95E1-4699-9DC7-B0793D1AB10D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47AC3A8B-5CA0-450E-BD6D-8068BDD6E83B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47AC3A8B-5CA0-450E-BD6D-8068BDD6E83B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47AC3A8B-5CA0-450E-BD6D-8068BDD6E83B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47AC3A8B-5CA0-450E-BD6D-8068BDD6E83B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{239830B2-95E1-4699-9DC7-B0793D1AB10D} = {D6EC06A4-7405-4F98-B1B4-5528863920A7}
+		{47AC3A8B-5CA0-450E-BD6D-8068BDD6E83B} = {D6EC06A4-7405-4F98-B1B4-5528863920A7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6152B1D9-2E8B-4199-8FA8-98D25C89607B}

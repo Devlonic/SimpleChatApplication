@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.20" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+    <PackageReference Include="xunit" Version="2.8.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleChatApplication.Api\SimpleChatApplication.Api.csproj" />
+    <ProjectReference Include="..\SimpleChatApplication.BLL\SimpleChatApplication.BLL.csproj" />
+    <ProjectReference Include="..\SimpleChatApplication.DAL\SimpleChatApplication.DAL.csproj" />
+  </ItemGroup>
+</Project>

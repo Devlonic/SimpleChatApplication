@@ -6,7 +6,7 @@ using SimpleChatApplication.DAL.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
 namespace SimpleChatApplication.Tests {
-    public class TestBase {
+    public class TestBase : IDisposable {
         public TestBase() {
             // prepare all required enviroment for passing tests
             Task.Run(PrepareEnviroment).Wait();
@@ -51,6 +51,10 @@ namespace SimpleChatApplication.Tests {
         public async Task CleanUpEnviroment() {
             var database = ServiceProvider.GetRequiredService<ChatApplicationDbContext>();
             await database.Database.EnsureDeletedAsync();
+        }
+
+        public void Dispose() {
+            CleanUpEnviroment().Wait();
         }
     }
 }
