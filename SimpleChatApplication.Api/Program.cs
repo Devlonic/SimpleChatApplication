@@ -7,6 +7,8 @@ using SimpleChatApplication.BLL.Models.EventTypes;
 using SimpleChatApplication.Api.Events;
 using Microsoft.AspNetCore.SignalR;
 using SimpleChatApplication.Api;
+using SimpleChatApplication.BLL.Services;
+using SimpleChatApplication.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +34,7 @@ builder.Services.AddDataAccessLayerServices(configuration);
 builder.Services.AddBusinessLogicLayerServices(configuration);
 
 // Add API services
+builder.Services.AddSingleton<IChatService, RealTimeChatService>();
 
 // add SignalR wrappers
 builder.Services.AddScoped<IEventPublisher<ChatMessageEvent>, ChatMessageEventPublisher>();

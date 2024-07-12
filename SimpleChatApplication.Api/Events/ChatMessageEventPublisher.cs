@@ -2,22 +2,23 @@
 using SimpleChatApplication.Api.Hubs;
 using SimpleChatApplication.BLL.CQRS.Events;
 using SimpleChatApplication.BLL.Models.EventTypes;
+using SimpleChatApplication.BLL.Services;
 using SimpleChatApplication.DAL.Data.Contexts;
 
 namespace SimpleChatApplication.Api.Events {
+    // do not use this class, not implemented
     public class ChatMessageEventPublisher : IEventPublisher<ChatMessageEvent> {
-        private readonly IHubContext<ChatHub> hub;
-        private readonly ChatApplicationDbContext dbContext;
+        private readonly IChatService chatService;
 
-        public ChatMessageEventPublisher(ChatApplicationDbContext db, IHubContext<ChatHub> hub) {
-            dbContext = db;
-            this.hub = hub;
+        public ChatMessageEventPublisher(IChatService chatService) {
+            this.chatService = chatService;
         }
         public async Task SendEventAsync(ChatMessageEvent data) {
+            throw new NotImplementedException();
             switch ( data.MessageType ) {
                 case ChatMessageEvent.ChatMessageType.UserJoin:
                 var parameters = data.MessageBody as ChatMessageEvent.UserJoinInfo;
-                await this.hub.Clients.User(parameters.UserId.ToString()).SendAsync("ChatMessageEvent", data);
+                //await chatService.JoinToRoomAsync(parameters);
                 break;
                 case ChatMessageEvent.ChatMessageType.UserExit:
                 break;

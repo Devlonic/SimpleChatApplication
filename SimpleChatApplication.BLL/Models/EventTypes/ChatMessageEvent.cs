@@ -1,4 +1,7 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using SimpleChatApplication.DAL.Entities;
+using System.Text.Json.Serialization;
+using JsonIgnoreAttribute = Newtonsoft.Json.JsonIgnoreAttribute;
 
 namespace SimpleChatApplication.BLL.Models.EventTypes {
     public class ChatMessageEvent {
@@ -16,6 +19,23 @@ namespace SimpleChatApplication.BLL.Models.EventTypes {
             public string UserName { get; set; }
             public int UserId { get; set; }
             public int ChatRoomId { get; set; }
+
+            [JsonIgnore]
+            public UserEntity? User { get; set; }
+            [JsonIgnore]
+            public ChatRoomEntity? ChatRoom { get; set; }
+        }
+
+        public class SendMessageInfo {
+            public string UserName { get; set; }
+            public int UserId { get; set; }
+            public int ChatRoomId { get; set; }
+            public string Message { get; set; }
+
+            [JsonIgnore]
+            public UserEntity? User { get; set; }
+            [JsonIgnore]
+            public ChatRoomEntity? ChatRoom { get; set; }
         }
     }
 }

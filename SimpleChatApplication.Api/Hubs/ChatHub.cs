@@ -17,15 +17,21 @@ namespace SimpleChatApplication.Api.Hubs {
             this.mediator = mediator;
         }
 
-        public async Task Send(string userSendedMessage) {
-            await this.Clients.All.SendAsync("MessageReceived", $"user {this.Context.UserIdentifier} send: {userSendedMessage}");
+        public async Task SendMessage(SendMessageToChatRoomRequestDto dto) {
+            var userId = int.Parse(Context.UserIdentifier ?? "");
+
+            await mediator.Publish(new UserSentMessageToChatRoomNotification() {
+                ChatRoomId = dto.ChatRoomId,
+                Message = dto.MessageText,
+                UserId = userId
+            });
         }
         public async Task JoinToChatRoom(JoinToChatRoomRequestDto dto) {
-            var userId = Context.UserIdentifier ?? "";
+            var userId = int.Parse(Context.UserIdentifier ?? "");
 
             await mediator.Publish(new NewUserConnectedToRoomNotification() {
                 ChatRoomId = dto.ChatRoomId,
-                UserId = int.Parse(userId),
+                UserId = userId
             });
         }
     }

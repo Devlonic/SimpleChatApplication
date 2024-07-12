@@ -7,6 +7,10 @@ namespace SimpleChatApplication.DAL.Entities {
         public int Id { get; set; }
         public string? UserName { get; set; } = null!;
 
+        public override bool Equals(object? obj) {
+            return (obj as UserEntity)?.Id == this.Id;
+        }
+
         public class UserEntityConfiguration : IEntityTypeConfiguration<UserEntity> {
             public void Configure(EntityTypeBuilder<UserEntity> builder) {
                 builder.HasKey(x => x.Id);
